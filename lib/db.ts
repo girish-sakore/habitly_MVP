@@ -13,6 +13,7 @@ if (!connectionString) {
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
   pool: Pool | undefined;
+  prismaCleanupRegistered: boolean | undefined;
 };
 
 const pool =
@@ -32,4 +33,18 @@ export const prisma =
 
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
+}
+
+if (process.env.NODE_ENV !== "production" && !globalForPrisma.prismaCleanupRegistered) {
+  let cleanedUp = false;
+  const cleanup = async () => {
+    if (cleanedUp) return;
+    cleanedUp = true;
+    await prisma.$disconnect();
+    await pool.end();
+  };
+
+  process.once("SIGINT", () => void cleanup());
+  process.once("SIGTERM", () => void cleanup());
+  globalForPrisma.prismaCleanupRegistered = true;
 }

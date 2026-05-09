@@ -1,36 +1,53 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import type { NextAuthOptions } from "next-auth";
-import EmailProvider from "next-auth/providers/email";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { betterAuth } from "better-auth";
+import { toNextJsHandler, nextCookies } from "better-auth/next-js";
+import { magicLink } from "better-auth/plugins";
+import nodemailer from "nodemailer";
 
 import { prisma } from "@/lib/db";
 
-export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
-  /** JWT sessions so Edge middleware can validate via `getToken` (database cookies are opaque). */
+const emailServer = process.env.EMAIL_SERVER;
+const emailFrom = process.env.EMAIL_FROM ?? "Habitly <no-reply@habitly.app>";
+
+const transporter = emailServer
+  ? nodemailer.createTransport(emailServer)
+  : null;
+
+export const auth = betterAuth({
+  appName: "Habitly",
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
+  }),
   session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
+    expiresIn: 60 * 60 * 24 * 7,
+    updateAge: 60 * 60 * 24,
+    disableSessionRefresh: true,
   },
-  pages: {
-    signIn: "/login",
-  },
-  secret: process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET,
-  providers: [
-    EmailProvider({
-      server: process.env.EMAIL_SERVER,
-      from:
-        process.env.EMAIL_FROM ?? "NextAuth <no-reply@localhost>",
-        sendVerificationRequest: async ({ identifier, url }) => {
-          console.log(`Magic link for ${identifier}: ${url}`);
-        },
+  plugins: [
+    nextCookies(),
+    magicLink({
+      expiresIn: 60 * 10,
+      sendMagicLink: async ({ email, url }) => {
+        if (transporter) {
+          await transporter.sendMail({
+            from: emailFrom,
+            to: email,
+            subject: "Your Habitly magic link",
+            text: `Open this link to sign in: ${url}`,
+            html: `<p>Open this link to sign in:</p><p><a href="${url}">${url}</a></p>`,
+          });
+          return;
+        }
+
+        if (process.env.NODE_ENV !== "production") {
+          console.info(`[auth] magic-link ${email}: ${url}`);
+          return;
+        }
+
+        throw new Error("EMAIL_SERVER must be configured in production.");
+      },
     }),
   ],
-  callbacks: {
-    async session({ session, token }) {
-      if (session.user && token.sub) {
-        session.user.id = token.sub;
-      }
-      return session;
-    },
-  },
-};
+});
+
+export const authHandler = toNextJsHandler(auth);

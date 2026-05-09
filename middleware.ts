@@ -1,11 +1,18 @@
-import { withAuth } from "next-auth/middleware";
+import { getSessionCookie } from "better-auth/cookies";
+import { NextResponse, type NextRequest } from "next/server";
 
-export default withAuth({
-  pages: {
-    signIn: "/login",
-  },
-});
+export default function middleware(request: NextRequest) {
+  const hasSessionCookie = Boolean(getSessionCookie(request.headers));
+  if (hasSessionCookie) {
+    return NextResponse.next();
+  }
+
+  const loginUrl = new URL("/login", request.url);
+  const callbackUrl = `${request.nextUrl.pathname}${request.nextUrl.search}`;
+  loginUrl.searchParams.set("callbackUrl", callbackUrl);
+  return NextResponse.redirect(loginUrl);
+}
 
 export const config = {
-  matcher: ["/play/:path*"],
+  matcher: ["/edition/:path*", "/profile"],
 };
