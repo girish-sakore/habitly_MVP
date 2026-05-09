@@ -20,20 +20,21 @@ export function LoginForm() {
       setError("Enter your email to continue.");
       return;
     }
-
     setBusy(true);
     setError(null);
-
-    const { error: signInError } = await authClient.signIn.magicLink({
-      email: trimmed,
-      callbackURL: callbackUrl,
-    });
-
-    if (signInError) {
-      setError(signInError.message || "Could not send link.");
-      setBusy(false);
-    } else {
+    try {
+      const { error: signInError } = await authClient.signIn.magicLink({
+        email: trimmed,
+        callbackURL: callbackUrl,
+      });
+      if (signInError) {
+        setError("Could not send your magic link.");
+        return;
+      }
       setSubmitted(true);
+    } catch {
+      setError("Could not send your magic link.");
+    } finally {
       setBusy(false);
     }
   }
