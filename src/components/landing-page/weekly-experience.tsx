@@ -3,7 +3,7 @@ export default function WeeklyExperience() {
     <section className="py-12 px-6 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4">
         {/* Large Feature: The Weekly Board */}
-        <div className="md:col-span-2 md:row-span-2 bg-[#3a6757] text-white rounded-4xl p-10 flex flex-col justify-between overflow-hidden relative">
+        <div className="md:col-span-2 md:row-span-2 bg-[#3A6757] text-white rounded-4xl p-10 flex flex-col justify-between overflow-hidden relative">
           <div className="z-10 space-y-4">
             <span className="text-[12px] font-bold uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full">MOST POPULAR</span>
             <h3 className="text-3xl font-bold">The Weekly Board</h3>
