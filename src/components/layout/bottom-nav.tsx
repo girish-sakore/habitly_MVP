@@ -6,7 +6,7 @@ export default function BottomNav() {
       {/* Play Button (Active) */}
       <Link
         href="#"
-        className="flex flex-col items-center justify-center bg-[#d4e9e2] dark:bg-[#3a6757] text-[#3a6757] dark:text-white rounded-xl px-6 py-2 shadow-[0_2px_0_0_#3a6757] translate-y-0.5 transition-all duration-75"
+        className="flex flex-col items-center justify-center bg-[#d4e9e2] dark:bg-[#3A6757] text-[#3a6757] dark:text-white rounded-xl px-6 py-2 shadow-[0_2px_0_0_#3a6757] translate-y-0.5 transition-all duration-75"
       >
         <span className="material-symbols-outlined">joystick</span>
         <span className="font-bold text-xs uppercase">Play</span>

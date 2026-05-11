@@ -10,7 +10,7 @@ export default function ProgressSection() {
             <p className="text-[#454742] text-lg">Every action has a reaction. Watch your progress bars fill with liquid smoothness.</p>
             
             <div className="space-y-4">
-              <ProgressBar label="READING 20 MINS" progress="w-[85%]" color="bg-[#3a6757]" percent="85%" />
+              <ProgressBar label="READING 20 MINS" progress="w-[85%]" color="bg-[#3A6757]" percent="85%" />
               <ProgressBar label="MORNING MEDITATION" progress="w-[60%]" color="bg-[#30628a]" percent="60%" />
             </div>
           </div>

@@ -12,7 +12,7 @@ export default function HeroSection() {
           Habitly turns boring routines into a delightful journey of growth. Experience the most tactile and rewarding habit tracker ever made.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-          <button className="btn-tactile px-8 py-4 bg-[#3a6757] text-white rounded-xl text-xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02]">
+          <button className="btn-tactile px-8 py-4 bg-[#3A6757] text-white rounded-xl text-xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02]">
             Start This Week's Challenge
             <span>→</span>
           </button>
@@ -26,7 +26,7 @@ export default function HeroSection() {
         <div className="aspect-square bg-[url('/images/thepaintedsquare_1.jpg')] bg-cover bg-center rounded-[48px] overflow-hidden soft-card-shadow relative">
           <div className="absolute inset-0 bg-black/5 flex items-center justify-center">
             <div className="bg-white/90 backdrop-blur-md p-6 rounded-3xl soft-card-shadow flex items-center gap-4 border border-white/50">
-              <div className="w-12 h-12 bg-[#3a6757] rounded-full flex items-center justify-center text-white">
+              <div className="w-12 h-12 bg-[#3A6757] rounded-full flex items-center justify-center text-white">
                 🔥
               </div>
               <div>
