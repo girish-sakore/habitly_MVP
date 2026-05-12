@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-liquid {
+            background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.3) 100%);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e5e2e1",
+                    "tertiary-fixed-dim": "#9bcbf8",
+                    "surface-tint": "#5e5e5c",
+                    "primary-container": "#fdfbf7",
+                    "primary-fixed": "#e4e2de",
+                    "surface-container-high": "#ebe7e6",
+                    "primary-fixed-dim": "#c8c6c3",
+                    "secondary": "#3a6757",
+                    "on-surface-variant": "#454742",
+                    "on-secondary-fixed": "#002117",
+                    "secondary-container": "#baead6",
+                    "tertiary": "#30628a",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#fafbff",
+                    "secondary-fixed": "#bdedd9",
+                    "on-primary-fixed": "#1b1c1a",
+                    "tertiary-fixed": "#cde5ff",
+                    "surface-container": "#f1edec",
+                    "surface-container-low": "#f7f3f2",
+                    "surface-dim": "#ddd9d8",
+                    "on-tertiary-container": "#4778a0",
+                    "inverse-primary": "#c8c6c3",
+                    "on-tertiary-fixed-variant": "#104a70",
+                    "on-background": "#1c1b1b",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#224f40",
+                    "outline-variant": "#c6c7c0",
+                    "outline": "#767872",
+                    "background": "#fcf8f7",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#a1d1bd",
+                    "surface-bright": "#fcf8f7",
+                    "primary": "#5e5e5c",
+                    "on-primary-fixed-variant": "#474744",
+                    "surface": "#fcf8f7",
+                    "on-tertiary-fixed": "#001d32",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f4f0ef",
+                    "on-secondary-container": "#3f6b5b",
+                    "on-primary-container": "#747471",
+                    "inverse-surface": "#313030",
+                    "on-surface": "#1c1b1b",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "section-gap": "48px",
+                    "touch-target-min": "48px",
+                    "container-margin": "24px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "display-xl": ["Plus Jakarta Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-caps": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "500"}],
+                    "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-container-margin py-unit h-16 bg-surface dark:bg-background top-0 fixed z-50">
+<div class="flex items-center gap-3 hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-100">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional and clean studio portrait of a woman with a friendly expression. The lighting is soft and high-key, emphasizing a light-mode aesthetic with a warm beige background that matches a minimalist UI design. The overall mood is approachable, modern, and serene, fitting a high-end habit tracking application's user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsMxPoymG78GanGqEhJHLQW72YRzMO1xF4TNMcNoINRHzavvMfUxqGW3dx7Tkpm6oGTQVvOsgLRUZPHyQv_jorS65E-QRv2oSAPdHB9Of1_zlW6pqsTwV4LXHxY2ywOpXtXwWI7YzQZ0Ur5Ue8oTbjxHbquvPxLyY3KbJiGx_pvO3ylel19ULltcuwDcBZFRgfhlAz27wbGWKXfqmO3EvxOeAoce4_zARRsWIPt9L0AaSDUKyNfb5OIxzOxK_OaI_FoW77yKBxMJA"/>
+</div>
+<span class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">Habitly</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant dark:text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-100" data-icon="settings">
+            settings
+        </button>
+</header>
+<main class="pt-24 px-container-margin flex flex-col gap-section-gap">
+<!-- User Identity Section -->
+<section class="flex flex-col items-center text-center gap-4">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-secondary to-secondary-container">
+<div class="w-full h-full rounded-full border-4 border-surface overflow-hidden">
+<img alt="User Profile Large" class="w-full h-full object-cover" data-alt="Detailed close-up portrait of a woman for a user profile interface. The image features soft, natural daylight, reflecting a peaceful and productive morning atmosphere. The background is a clean, creamy off-white that integrates seamlessly with a minimalist, high-end productivity tool aesthetic. The color palette is warm and optimistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9MXX_ivLcmppnQhdj1kfpYR6dt6frVO9L5GIJhiuBYx3nv6peXqTRvnwDz17168vdn4CjS7DNaMGKg4q6f81GZZ256V4oT6dNvX7sPiU94Ar4YBFn_EAoLbH84lzVxG_CpDPIvh9DO8U-0SeKWMqPk_d08gGVR4M7SdUyJO0HEWny9y7kJWRjgwsdPGbzW_MoDILEm7-jmEBBL0iUl2DvtQrh76h1HPwTLsn4JBEPimnckBXsQSw6CUdkBqPV5z7uo4TZgDdmyrA"/>
+</div>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-caps text-label-caps">PRO</span>
+</div>
+</div>
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Alex Rivera</h1>
+<p class="font-body-md text-on-surface-variant opacity-70">alex.rivera@habitly.com</p>
+</div>
+</section>
+<!-- Bento Stats Grid -->
+<section class="grid grid-cols-2 gap-gutter">
+<!-- Streak Card -->
+<div class="bg-surface-container-low p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col items-center justify-center gap-2 hover:translate-y-[-2px] transition-transform duration-200">
+<div class="w-12 h-12 rounded-full bg-secondary-container/30 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-secondary text-[28px]" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<span class="font-display-xl text-display-xl text-secondary">14</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Day Streak</span>
+</div>
+<!-- Subscription Card -->
+<div class="bg-primary-container p-6 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col items-center justify-center gap-2 border border-outline-variant/10 hover:translate-y-[-2px] transition-transform duration-200">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed/30 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-tertiary text-[28px]" data-icon="verified">verified</span>
+</div>
+<span class="font-headline-md text-headline-md text-tertiary">Premium</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Annual Plan</span>
+</div>
+</section>
+<!-- Completed Editions List -->
+<section class="flex flex-col gap-6">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-md text-headline-md text-on-surface">Completed Editions</h2>
+<span class="font-label-caps text-label-caps text-secondary underline cursor-pointer">View All</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Edition Item 1 -->
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.02)] border-b-2 border-surface-container hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="w-14 h-14 rounded-lg bg-secondary-fixed flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant" data-icon="water_drop">water_drop</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-body-lg text-body-lg text-on-surface">Daily Hydration</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">March 2024 • 30/30 Days</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-1 w-12 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-full"></div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Edition Item 2 -->
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.02)] border-b-2 border-surface-container hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="w-14 h-14 rounded-lg bg-tertiary-fixed flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant" data-icon="menu_book">menu_book</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-body-lg text-body-lg text-on-surface">Evening Reading</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">February 2024 • 28/28 Days</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-1 w-12 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-full"></div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<!-- Edition Item 3 -->
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.02)] border-b-2 border-surface-container hover:bg-surface-container-low transition-colors group cursor-pointer">
+<div class="w-14 h-14 rounded-lg bg-primary-fixed-dim flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-fixed-variant" data-icon="mindfulness">mindfulness</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-body-lg text-body-lg text-on-surface">Morning Zen</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">January 2024 • 31/31 Days</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-1 w-12 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-full"></div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Utility Section -->
+<section class="flex flex-col gap-4 mb-8">
+<button class="w-full flex items-center justify-center gap-2 py-4 px-6 bg-error-container text-on-error-container font-body-lg text-body-lg rounded-xl active:translate-y-0.5 transition-all duration-75 group shadow-[0_2px_0_0_#ba1a1a]">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </button>
+<p class="text-center font-label-caps text-label-caps text-outline opacity-50">App Version 2.4.1 (Stable)</p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-surface-container dark:bg-surface-container-highest shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant/10 rounded-xl active:translate-y-0.5 transition-all duration-75" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="joystick">joystick</span>
+<span class="font-label-caps text-label-caps">Play</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:bg-surface-variant dark:hover:bg-on-surface-variant/10 rounded-xl active:translate-y-0.5 transition-all duration-75" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="leaderboard">leaderboard</span>
+<span class="font-label-caps text-label-caps">Rankings</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl px-6 py-2 shadow-[0_2px_0_0_#3a6757] active:translate-y-0.5 transition-all duration-75" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</nav>
+</body></html>
