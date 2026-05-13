@@ -1,7 +1,7 @@
 export default function WeeklyExperience() {
   return (
     <section className="py-12 px-6 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-1 md:grid-rows-2 gap-4">
         {/* Large Feature: The Weekly Board */}
         <div className="md:col-span-2 md:row-span-2 bg-[#3A6757] text-white rounded-4xl p-10 flex flex-col justify-between overflow-hidden relative">
           <div className="z-10 space-y-4">

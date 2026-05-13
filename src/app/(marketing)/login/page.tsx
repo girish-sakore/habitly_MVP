@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { MobileContainer } from "@/components/layout/mobile-container";
 import { LoginForm } from "@/features/auth/login-form";
 import { getCachedAuthSession } from "@/lib/auth-session";
+import Image from "next/image";
 
 export default async function LoginPage() {
   const session = await getCachedAuthSession();
@@ -34,34 +35,29 @@ export default async function LoginPage() {
           {/* Decorative bento tiles */}
           <div className="grid grid-cols-2 gap-4 w-full">
             <div
-              className="aspect-square rounded-2xl flex items-center justify-center p-6 shadow-sm"
+              className="relative aspect-square rounded-2xl overflow-hidden shadow-sm"
               style={{ backgroundColor: "var(--secondary-container)" }}
-            >
-              <span
-                className="material-symbols-outlined"
-                style={{
-                  fontSize: 64,
-                  color: "var(--on-secondary-container)",
-                  fontVariationSettings: "'FILL' 1",
-                }}
               >
-                local_fire_department
-              </span>
+              <Image
+                src="/images/healthy.jpg"
+                alt="healthy lifestyle"
+                fill
+                sizes="250px"
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
             </div>
+
             <div
-              className="aspect-square rounded-2xl flex items-center justify-center p-6 shadow-sm"
+              className="relative aspect-square rounded-2xl overflow-hidden shadow-sm"
               style={{ backgroundColor: "var(--tertiary-fixed)" }}
-            >
-              <span
-                className="material-symbols-outlined"
-                style={{
-                  fontSize: 64,
-                  color: "var(--on-tertiary-fixed-variant)",
-                  fontVariationSettings: "'FILL' 1",
-                }}
               >
-                menu_book
-              </span>
+              <Image
+                src="/images/books.jpg"
+                alt="Books"
+                fill
+                sizes="250px"
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
             </div>
           </div>
 
