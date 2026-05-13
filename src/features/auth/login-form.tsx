@@ -204,7 +204,7 @@ export function LoginForm() {
           }}
         >
           <div
-            className="p-3 rounded-xl flex-shrink-0"
+            className="p-3 rounded-xl shrink-0"
             style={{
               backgroundColor: "var(--secondary-fixed)",
               color: "var(--on-secondary-fixed)",

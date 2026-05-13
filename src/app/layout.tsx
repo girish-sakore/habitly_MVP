@@ -38,7 +38,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
       </head>
-      <body className="min-h-[100dvh] w-full max-w-[430px] bg-surface font-[family-name:var(--font-jakarta)]">
+      <body className="min-h-dvh w-full max-w-107.5 bg-surface font-jakarta">
         {children}
       </body>
     </html>
