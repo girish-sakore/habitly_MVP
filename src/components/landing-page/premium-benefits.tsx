@@ -27,7 +27,7 @@ export default function PremiumBenefits() {
       <h2 className="text-4xl font-bold text-center mb-16">
         Unlock your full potential
       </h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
         {benefits.map((benefit, index) => (
           <div
             key={index}

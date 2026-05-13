@@ -11,7 +11,7 @@ export default async function LoginPage() {
   return (
     <MobileContainer>
       <div
-        className="flex flex-col min-h-[100dvh]"
+        className="flex flex-col min-h-dvh"
         style={{ backgroundColor: "var(--background)" }}
       >
         {/* Brand header */}
@@ -25,7 +25,7 @@ export default async function LoginPage() {
         </header>
 
         {/* Main content */}
-        <main className="flex-grow flex flex-col items-center px-6 w-full gap-12">
+        <main className="grow flex flex-col items-center px-6 w-full gap-12">
 
           {/* Form */}
           <div className="w-full">

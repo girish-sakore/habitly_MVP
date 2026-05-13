@@ -1,13 +1,16 @@
 import { MobileContainer } from "@/components/layout/mobile-container";
-import { TopBar } from "@/components/layout/top-bar";
-import { PremiumCard } from "@/components/ui/premium-card";
+import { PricingBenefits } from "@/components/pricing/pricing-benefits";
+import { PricingPlans } from "@/components/pricing/pricing-plans";
+import { PricingFooter } from "@/components/pricing/pricing-footer";
 
 export default function PricingPage() {
   return (
     <MobileContainer>
-      <TopBar title="Pricing" subtitle="Unlock premium progression" />
-      <main className="px-4 pt-8">
-        <PremiumCard />
+      {/* <PricingHeader /> */}
+      <main className="flex flex-col gap-10 px-6 pt-6 pb-16">
+        <PricingBenefits />
+        <PricingPlans />
+        <PricingFooter />
       </main>
     </MobileContainer>
   );
