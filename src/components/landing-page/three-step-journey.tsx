@@ -8,7 +8,7 @@ export default function ThreeStepJourney() {
           <h2 className="text-4xl font-bold">A 3-step journey to mastery</h2>
           <p className="text-lg text-[#454742]">Simple to start, impossible to quit.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-1 gap-8">
           <StepCard 
             number="1" 
             title="Define Your Focus" 
