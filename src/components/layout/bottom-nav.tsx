@@ -13,7 +13,7 @@ export default function BottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full max-w-[430px] z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-surface-container shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-xl">
+    <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-surface-container shadow-[0_-4px_20px_rgba(0,0,0,0.05)] rounded-t-xl">
       {links.map(({ href, icon, label }) => {
         const isActive = pathname === href;
         return (

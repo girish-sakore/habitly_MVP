@@ -153,7 +153,7 @@
 }
 
 body {
-  margin: 0;
+  margin: auto;
   min-height: 100dvh;
   background: var(--surface);
   color: var(--foreground);
