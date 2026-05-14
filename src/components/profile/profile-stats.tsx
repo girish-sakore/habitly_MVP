@@ -1,4 +1,10 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 export function ProfileStats() {
+  const router = useRouter();
+
   return (
     <section className="grid grid-cols-2 gap-4">
       {/* Streak card */}
@@ -36,37 +42,40 @@ export function ProfileStats() {
       </div>
 
       {/* Plan card */}
-      <div
-        className="p-6 rounded-xl shadow-sm flex flex-col items-center justify-center gap-2 hover:-translate-y-0.5 transition-transform duration-200"
-        style={{
-          backgroundColor: "var(--primary-container)",
-          border: "1px solid color-mix(in srgb, var(--outline-variant) 10%, transparent)",
-        }}
-      >
+      {/* <Link href="/pricing" > */}
         <div
-          className="w-12 h-12 rounded-full flex items-center justify-center mb-1"
-          style={{ backgroundColor: "color-mix(in srgb, var(--tertiary-fixed) 30%, transparent)" }}
+          className="p-6 rounded-xl shadow-sm flex flex-col items-center justify-center gap-2 hover:-translate-y-0.5 transition-transform duration-200"
+          style={{
+            backgroundColor: "var(--primary-container)",
+            border: "1px solid color-mix(in srgb, var(--outline-variant) 10%, transparent)",
+          }}
+          onClick={() => router.push("/pricing")}
         >
-          <span
-            className="material-symbols-outlined"
-            style={{ fontSize: 28, color: "var(--tertiary)" }}
+          <div
+            className="w-12 h-12 rounded-full flex items-center justify-center mb-1"
+            style={{ backgroundColor: "color-mix(in srgb, var(--tertiary-fixed) 30%, transparent)" }}
           >
-            verified
+            <span
+              className="material-symbols-outlined"
+              style={{ fontSize: 28, color: "var(--tertiary)" }}
+            >
+              verified
+            </span>
+          </div>
+          <span
+            className="text-[20px] font-bold"
+            style={{ color: "var(--tertiary)" }}
+          >
+            Premium
+          </span>
+          <span
+            className="text-[11px] font-bold tracking-widest uppercase"
+            style={{ color: "var(--on-surface-variant)" }}
+          >
+            Annual Plan
           </span>
         </div>
-        <span
-          className="text-[20px] font-bold"
-          style={{ color: "var(--tertiary)" }}
-        >
-          Premium
-        </span>
-        <span
-          className="text-[11px] font-bold tracking-widest uppercase"
-          style={{ color: "var(--on-surface-variant)" }}
-        >
-          Annual Plan
-        </span>
-      </div>
+      {/* </Link> */}
     </section>
   );
 }
