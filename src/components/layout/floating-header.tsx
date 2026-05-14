@@ -6,7 +6,7 @@ export function FloatingHeader() {
       className="flex justify-between items-center w-full px-6 h-16 sticky top-0 z-50"
       style={{ backgroundColor: "var(--surface)" }}
     >
-      <Link href="/edition/current">
+      <Link href="/profile">
         <span
           className="material-symbols-outlined hover:opacity-70 transition-opacity cursor-pointer"
           style={{ color: "var(--on-surface)" }}

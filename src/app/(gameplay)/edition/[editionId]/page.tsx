@@ -30,7 +30,7 @@ export default async function EditionGameplayPage({ params }: PageProps) {
       
     </main>
 
-    <BottomNav />
+    {/* <BottomNav /> */}
   </MobileContainer>
   );
 }
