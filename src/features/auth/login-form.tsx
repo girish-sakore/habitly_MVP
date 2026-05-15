@@ -143,7 +143,7 @@ export function LoginForm() {
             className="w-full h-14 rounded-xl text-[16px] font-bold flex items-center justify-center gap-2 transition-all duration-75 active:translate-y-0.5"
             style={{
               backgroundColor: "var(--secondary)",
-              color: "var(--on-secondary)",
+              color: "var(--secondary-foreground)",
               boxShadow: "0 4px 0 0 #224f40",
             }}
           >
@@ -298,7 +298,7 @@ export function LoginForm() {
         className="h-14 w-full rounded-xl text-[16px] font-bold flex items-center justify-center gap-2 transition-all duration-75 active:translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
         style={{
           backgroundColor: "var(--secondary)",
-          color: "var(--on-secondary)",
+          color: "var(--secondary-foreground)",
           boxShadow: busy ? "none" : "0 4px 0 0 #2a4d41",
         }}
       >

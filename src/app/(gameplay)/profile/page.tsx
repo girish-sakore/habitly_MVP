@@ -11,15 +11,34 @@ import { LogoutButton } from "@/components/profile/logout-button";
 export default async function ProfilePage() {
   const session = await getCachedAuthSession();
   if (!session?.user) redirect("/login");
+
   const { name, email, image } = session.user;
+  const user = session.user as {
+    name?: string | null;
+    email: string;
+    image?: string | null;
+    isPremium?: boolean;
+    plan?: string | null;
+    subscriptionEnd?: string | null;
+  };
+
+  const isPremium = user.isPremium ?? false;
+  const plan = user.plan ?? null;
+  const subscriptionEnd = user.subscriptionEnd
+    ? new Date(user.subscriptionEnd)
+    : null;
 
   return (
     <MobileContainer>
       <ProfileHeader name={name ?? ""} email={email} image={image} />
 
-      <main className="flex flex-col gap-12 px-6 pt-8 pb-32 bg-surface">
+      <main className="flex flex-col gap-12 px-6 pt-8 pb-32">
         <ProfileAvatar name={name ?? ""} email={email} image={image} />
-        <ProfileStats />
+        <ProfileStats
+          isPremium={isPremium}
+          plan={plan}
+          subscriptionEnd={subscriptionEnd}
+        />
         <ProfileEditions />
 
         <section className="flex flex-col gap-4">
