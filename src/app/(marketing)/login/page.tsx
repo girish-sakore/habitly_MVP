@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 import { MobileContainer } from "@/components/layout/mobile-container";
 import { LoginForm } from "@/features/auth/login-form";
-import { getCachedAuthSession } from "@/lib/auth-session";
+import { getAuthSession } from "@/lib/auth-session";
 import Image from "next/image";
 
 export default async function LoginPage() {
-  const session = await getCachedAuthSession();
+  const session = await getAuthSession();
   if (session?.user?.id) redirect("/edition/current");
 
   return (

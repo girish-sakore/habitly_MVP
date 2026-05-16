@@ -1,4 +1,4 @@
-import { getCachedAuthSession } from "@/lib/auth-session";
+import { getAuthSession } from "@/lib/auth-session";
 import { redirect } from "next/navigation";
 import { MobileContainer } from "@/components/layout/mobile-container";
 import BottomNav from "@/components/layout/bottom-nav";
@@ -9,7 +9,7 @@ import { ProfileEditions } from "@/components/profile/profile-editions";
 import { LogoutButton } from "@/components/profile/logout-button";
 
 export default async function ProfilePage() {
-  const session = await getCachedAuthSession();
+  const session = await getAuthSession();
   if (!session?.user) redirect("/login");
 
   const { name, email, image } = session.user;

@@ -42,6 +42,7 @@
   /* Secondary */
   --secondary: #3a6757;
   --secondary-foreground: #ffffff;
+  --on-secondary: #ffffff;
   --secondary-container: #baead6;
   --secondary-fixed: #bdedd9;
   --secondary-fixed-dim: #a1d1bd;
