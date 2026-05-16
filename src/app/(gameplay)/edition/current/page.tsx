@@ -5,17 +5,20 @@ import { EditionHero } from "@/components/edition-intro/edition-hero";
 import { EditionProgress } from "@/components/edition-intro/edition-progress";
 import { EditionFocus } from "@/components/edition-intro/edition-focus";
 import { EditionCta } from "@/components/edition-intro/edition-cta";
+import { EditionCompleted } from "@/components/edition-intro/edition-completed";
 import { getFeaturedEdition } from "@/features/editions/edition-content";
-import { getCachedAuthSession } from "@/lib/auth-session";
+import { getAuthSession } from "@/lib/auth-session";
+import { getUserEditionProgress } from "@/lib/edition-progress";
 
 export default async function CurrentEditionPage() {
-  const session = await getCachedAuthSession();
+  const session = await getAuthSession();
   if (!session?.user) redirect("/login");
 
   const edition = getFeaturedEdition();
-
-  // TODO: fetch real completedStages from DB per user+edition
-  const completedStages = 0;
+  const progress = await getUserEditionProgress(
+    session.user.id,
+    edition.id,
+  );
 
   return (
     <MobileContainer>
@@ -56,9 +59,30 @@ export default async function CurrentEditionPage() {
 
       <main className="flex flex-col gap-10 px-6 pt-6 pb-32">
         <EditionHero edition={edition} />
-        <EditionProgress edition={edition} completedStages={completedStages} />
-        <EditionFocus />
-        <EditionCta edition={edition} />
+
+        {progress.status === "completed" ? (
+          // Completed state — no progress bar, no CTA
+          <EditionCompleted
+            score={progress.score}
+            completedAt={progress.completedAt}
+            totalStages={edition.stages.length}
+            correctAnswers={progress.correctAnswers}
+          />
+        ) : (
+          // Not started or in progress
+          <>
+            <EditionProgress
+              edition={edition}
+              completedStages={progress.currentStage}
+            />
+            <EditionFocus />
+            <EditionCta
+              edition={edition}
+              status={progress.status}
+              currentStage={progress.currentStage}
+            />
+          </>
+        )}
       </main>
 
       <BottomNav />

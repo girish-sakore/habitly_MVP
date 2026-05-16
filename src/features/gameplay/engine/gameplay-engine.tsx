@@ -1,32 +1,41 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-
 import { FeedbackModal } from "@/components/feedback/feedback-modal";
 import { InteractionRenderer } from "@/features/gameplay/renderer/interaction-renderer";
 import { GameplayShell } from "@/features/gameplay/shell/gameplay-shell";
 import { useGameplayStore } from "@/stores/gameplay-store";
 import type { Edition } from "@/types/gameplay";
 
-export function GameplayEngine({ edition }: { edition: Edition }) {
-  const router = useRouter();
+interface GameplayEngineProps {
+  edition: Edition;
+  initialStage?: number;
+}
 
+export function GameplayEngine({
+  edition,
+  initialStage = 0,
+}: GameplayEngineProps) {
+  const router = useRouter();
+  const hasNavigated = useRef(false); // guard navigation
+  const [retryCount, setRetryCount] = useState(0);
   const [feedback, setFeedback] = useState<{
     open: boolean;
     correct: boolean;
     message: string;
   }>({ open: false, correct: false, message: "" });
 
-  const [retryCount, setRetryCount] = useState(0);
-
   const {
     currentStage,
     attemptsRemaining,
     score,
+    correctAnswers,
+    totalAnswers,
     completed,
     setAttempts,
+    setStage,
     registerResult,
     nextStage,
     reset,
@@ -40,10 +49,66 @@ export function GameplayEngine({ edition }: { edition: Edition }) {
     [currentStage, edition.stages.length],
   );
 
+  // initialize from DB progress, not always 0
   useEffect(() => {
     reset();
-    setAttempts(edition.stages[0]?.attemptsAllowed ?? 0);
-  }, [edition, reset, setAttempts]);
+    setStage(initialStage);
+    setAttempts(
+      edition.stages[initialStage]?.attemptsAllowed ??
+      edition.stages[0]?.attemptsAllowed ??
+      0,
+    );
+  }, [edition, initialStage, reset, setStage, setAttempts]);
+
+  const syncProgress = useCallback(async (overrides?: {
+    score?: number;
+    correctAnswers?: number;
+    totalAnswers?: number;
+    currentStage?: number;
+  }) => {
+    try {
+      await fetch("/api/progress/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          editionId: edition.id,
+          currentStage: overrides?.currentStage ?? currentStage,
+          score: overrides?.score ?? score,
+          correctAnswers: overrides?.correctAnswers ?? correctAnswers,
+          totalAnswers: overrides?.totalAnswers ?? totalAnswers,
+        }),
+      });
+    } catch {
+      // Non-blocking
+    }
+  }, [edition.id, currentStage, score, correctAnswers, totalAnswers]);
+
+  const completeProgress = useCallback(async () => {
+    try {
+      await fetch("/api/progress/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          editionId: edition.id,
+          score,
+          correctAnswers,
+          totalAnswers,
+        }),
+      });
+    } catch {
+      // Non-blocking
+    }
+  }, [edition.id, score, correctAnswers, totalAnswers]);
+
+  // Issue 2 fix — navigate in an effect, never during render
+  useEffect(() => {
+    if ((completed || !stage) && !hasNavigated.current) {
+      hasNavigated.current = true;
+      completeProgress().then(() => {
+        router.push("/summary");
+      });
+    }
+  }, [completed, stage, completeProgress, router]);
 
   function handleAnswer({
     correct,
@@ -73,38 +138,33 @@ export function GameplayEngine({ edition }: { edition: Edition }) {
   function handleSkip() {
     setFeedback((s) => ({ ...s, open: false }));
     if (!stage) return;
+    advanceStage();
+  }
+
+  async function advanceStage() {
     const nextIndex = currentStage + 1;
     const nextAttempts = edition.stages[nextIndex]?.attemptsAllowed ?? 0;
     nextStage(edition.stages.length, nextAttempts);
-    if (nextIndex >= edition.stages.length) {
-      router.push("/summary");
+    // Sync mid-game — navigation handled by the useEffect above on completion
+    if (nextIndex < edition.stages.length) {
+      syncProgress({ currentStage: nextIndex });
     }
   }
 
-  function handleContinue() {
+  async function handleContinue() {
     setFeedback((s) => ({ ...s, open: false }));
     if (!stage) return;
-  
-    // Advance to next stage if: correct answer OR no attempts left OR
-    // user chose "View Explanation" / "Continue Anyway" (wrong but wants to move on)
-    const shouldAdvance = feedback.correct || attemptsRemaining <= 0;
-  
-    if (shouldAdvance) {
-      const nextIndex = currentStage + 1;
-      const nextAttempts = edition.stages[nextIndex]?.attemptsAllowed ?? 0;
-      nextStage(edition.stages.length, nextAttempts);
-      if (nextIndex >= edition.stages.length) {
-        router.push("/summary");
-      }
+    if (feedback.correct || attemptsRemaining <= 0) {
+      await advanceStage();
     }
-    // If attemptsRemaining > 0 and wrong → modal just closes, interaction
-    // resets via retryCount, user can try again manually without clicking Retry
   }
 
-  if (completed || !stage) {
-    router.push("/summary");
+  // While navigating away, render nothing
+  if ((completed || !stage) && hasNavigated.current) {
     return null;
   }
+
+  if (!stage) return null;
 
   return (
     <>
