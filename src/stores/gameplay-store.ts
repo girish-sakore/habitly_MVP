@@ -10,6 +10,9 @@ type GameplayState = {
   attemptsRemaining: number;
   completed: boolean;
   transitionState: TransitionState;
+  totalAnswers: number;
+  correctAnswers: number;
+  // Actions
   setAttempts: (attempts: number) => void;
   registerResult: (args: { correct: boolean; points: number }) => void;
   nextStage: (totalStages: number, nextAttempts: number) => void;
@@ -22,6 +25,8 @@ const initialState = {
   attemptsRemaining: 0,
   completed: false,
   transitionState: "idle" as TransitionState,
+  totalAnswers: 0,
+  correctAnswers: 0,
 };
 
 export const useGameplayStore = create<GameplayState>((set) => ({
@@ -34,6 +39,10 @@ export const useGameplayStore = create<GameplayState>((set) => ({
       attemptsRemaining: correct
         ? state.attemptsRemaining
         : Math.max(state.attemptsRemaining - 1, 0),
+      totalAnswers: state.totalAnswers + 1,
+      correctAnswers: correct
+        ? state.correctAnswers + 1
+        : state.correctAnswers,
     })),
   nextStage: (totalStages, nextAttempts) =>
     set((state) => {
